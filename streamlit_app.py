@@ -40,4 +40,17 @@ try:
         streamlit.error("Please select a fruit to get information.")
    else:
         back_from_function = get_fruityvice_data(fruit_choice)
-        return streamlit.dataframe(back_from_function)
+        streamlit.dataframe(back_from_function)
+        
+streamlit.header("The fruit load list contains:")
+#snowflake-related functions
+def get_fruit_load_list():
+    with my_cur.cursor() as my_cur:
+         my_cur.execute("select * from fruit_load_list")
+         return my_cur.fetchall()
+  
+#Add a button to load the fruit
+if streanlit.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_rows = get_fruit_load_list()
+    streamlit.dataframe(my_data_rows)
