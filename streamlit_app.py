@@ -26,7 +26,7 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado'
 # view dataframe
 streamlit.dataframe(my_fruit_list)
 
-#create the repearable code block (called a function)
+#create the repeatable code block (called a function)
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
